@@ -60,10 +60,12 @@ namespace GraphCollection
         {
             if (NodesDictionary.ContainsKey(first) && NodesDictionary.ContainsKey(second))
             {
-                NodesDictionary[first].AddNeighbor(second, cost);
-                return true;
+                if (!NodesDictionary[first].Neighbors.ContainsKey(second))
+                {
+                    NodesDictionary[first].AddNeighbor(second, cost);
+                    return true;
+                }
             }
-
             return false;
         }
 

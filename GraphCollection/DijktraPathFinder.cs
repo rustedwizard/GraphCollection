@@ -4,13 +4,16 @@ using System.Text;
 
 namespace GraphCollection
 {
-    class DijktraPathFinder<T> where T : class
+    public class DijktraPathFinder<T> where T : class
     {
         public DijiktraGraph<T> MainGraph { get; }
+
+        private bool FINISHED;
 
         public DijktraPathFinder()
         {
             MainGraph = new DijiktraGraph<T>();
+            FINISHED = false;
         }
 
         public int AddListOfNodes(List<T> nodes)
@@ -45,7 +48,7 @@ namespace GraphCollection
 
         //Find shortest path to every reachable node(from start point)
         //using Dijktra's Algorithm
-        private bool FindPaths(T startPoint)
+        public bool FindPaths(T startPoint)
         {
             if (!MainGraph.NodesDictionary.ContainsKey(startPoint))
             {
@@ -62,12 +65,12 @@ namespace GraphCollection
                 //set the neighbor node's previous node point to start point.
                 MainGraph.NodesDictionary[item.Key].PreviousNode = startPoint;
             }
-            //once visited all neighbors remove it from graph
+            //once visited all neighbors, remove it from graph
             //however the node is kept at result dictionary
             //Refer to DijktraGraph class.
             MainGraph.PopNodes(startPoint);
 
-            //handle all the reachable nodes(from start point) in graph
+            //handle all the reachable nodes in graph
             while (!MainGraph.IsGraphEmpty())
             {
                 //get the node with smallest weight
@@ -118,9 +121,16 @@ namespace GraphCollection
         //Reconstruct the path from result dictionary.
         public Tuple<String, int> GetPath(T startPoint, T endPoint)
         {
-            bool res = FindPaths(startPoint);
+            if (endPoint.Equals(startPoint))
+            {
+                return new Tuple<string, int>((startPoint + " -> " + startPoint), 0);
+            }
+            if (!FINISHED)
+            {
+                FINISHED = FindPaths(startPoint);
+            }
             //Check if find path method executed successfully
-            if (res)
+            if (FINISHED)
             {
                 var resultDictionary = MainGraph.Result;
                 //Check if endPoint does exists
@@ -134,7 +144,7 @@ namespace GraphCollection
                 int finalCost = resultDictionary[endPoint].Weight;
                 StringBuilder pathBuilder = new StringBuilder(current.ToString());
                 //Traverse through the path and construct path in string type
-                while (resultDictionary[endPoint].PreviousNode != null)
+                while (resultDictionary[current].PreviousNode != null)
                 {
                     pathBuilder.Insert(0, " -> ");
                     current = resultDictionary[current].PreviousNode;
