@@ -110,6 +110,7 @@ namespace GraphCollection
            return GetSortedListOfNodesValue()[0];
         }
 
+        //Clear all element inside the graph
         public void ClearGraph()
         {
             NodesDictionary.Clear();
