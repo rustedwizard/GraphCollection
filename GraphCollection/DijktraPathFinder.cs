@@ -16,6 +16,11 @@ namespace GraphCollection
             FINISHED = false;
         }
 
+        public bool AddNodes(T nodes)
+        {
+            return MainGraph.AddNodes(nodes);
+        }
+
         public int AddListOfNodes(List<T> nodes)
         {
             int res = 0;
@@ -29,6 +34,11 @@ namespace GraphCollection
             }
 
             return res;
+        }
+
+        public bool AddEdge(Tuple<T, T, int> edge)
+        {
+            return MainGraph.AddEdge(edge.Item1, edge.Item2, edge.Item3);
         }
 
         public int AddListOfEdge(List<Tuple<T, T, int>> edges)

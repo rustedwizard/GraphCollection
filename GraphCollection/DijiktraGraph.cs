@@ -4,7 +4,10 @@ namespace GraphCollection
 {
     public class DijiktraGraph<T> : IGraph<T> where T : class
     {
+        //All nodes in graph are stored here
         public Dictionary<T, DijiktraNode<T>> NodesDictionary { get; }
+
+        //All processed nodes are stored here
         public Dictionary<T, DijiktraNode<T>> Result { get;  }
 
         //Constructor, creates empty dictionary for Nodes collection
@@ -56,24 +59,35 @@ namespace GraphCollection
             return false;
         }
 
+        //Add edge to the graph
+        //An edge connects two nodes together
+        //Also a cost is associated with the edge
         public bool AddEdge(T first, T second, int cost)
         {
+            //Make sure both nodes are exist
             if (NodesDictionary.ContainsKey(first) && NodesDictionary.ContainsKey(second))
             {
+                //make sure no edge connects both nodes exists already.
                 if (!NodesDictionary[first].Neighbors.ContainsKey(second))
                 {
                     NodesDictionary[first].AddNeighbor(second, cost);
+                    //once edge added return true to comfirm.
                     return true;
                 }
             }
+            //if anyone of nodes does not exists
+            //or an edge connects two nodes already exist
+            //no edge will be added and return false
             return false;
         }
 
+        //determine if graph is empty
         public bool IsGraphEmpty()
         {
             return (NodesDictionary.Count == 0);
         }
 
+        //return all nodes in one list sorted by the weight associated with it.
         private List<T> GetSortedListOfNodesValue()
         {
             List<T> res = new List<T>();
@@ -90,6 +104,7 @@ namespace GraphCollection
             return res;
         }
 
+        //get the node with smallest weight.
         public T GetSmallestNodes()
         {
            return GetSortedListOfNodesValue()[0];
