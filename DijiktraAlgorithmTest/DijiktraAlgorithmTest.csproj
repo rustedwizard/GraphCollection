@@ -4,6 +4,16 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
 
     <IsPackable>false</IsPackable>
+
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+
+    <Description>This nuget package cotains C# implementation of Dijiktra's Algorithm.</Description>
+
+    <Version>1.0.17</Version>
+
+    <AssemblyVersion>1.0.17.23</AssemblyVersion>
+
+    <FileVersion>1.0.17.23</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
