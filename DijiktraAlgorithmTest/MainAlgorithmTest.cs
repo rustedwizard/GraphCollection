@@ -13,7 +13,6 @@ namespace DijiktraAlgorithmTest
         {
             DijktraPathFinder<string> dijktraPathFinder = new DijktraPathFinder<string>();
             var nodToAdd = new List<string>() { "loc1", "loc2", "loc3", "loc4", "loc5", "loc6", "loc7", "loc8" };
-            dijktraPathFinder.AddListOfNodes(nodToAdd);
             var edge1 = new Tuple<string, string, int>("loc1", "loc2", 3);
             var edge2 = new Tuple<string, string, int>("loc1", "loc3", 6);
             var edge3 = new Tuple<string, string, int>("loc2", "loc3", 1);
@@ -28,15 +27,28 @@ namespace DijiktraAlgorithmTest
             var edge12 = new Tuple<string, string, int>("loc6", "loc8", 5);
             var edge13 = new Tuple<string, string, int>("loc7", "loc8", 2);
             var edgeToAdd = new List<Tuple<string, string, int>>() { edge1, edge2, edge3, edge4, edge5, edge6, edge7, edge8, edge9, edge10, edge11, edge12, edge13 };
-            dijktraPathFinder.AddListOfEdge(edgeToAdd);
-            foreach (var item in nodToAdd)
+            foreach(var item in nodToAdd)
             {
-                var pathInfo = dijktraPathFinder.GetPath("loc1", item);
-                var path = pathInfo.Item1;
-                var cost = pathInfo.Item2;
-                Console.WriteLine("Route to {0}: {1}", item, path);
-                Console.WriteLine("Cost of Route to {0}: {1}", item, cost);
+                dijktraPathFinder.ClearGraph();
+                dijktraPathFinder.AddListOfNodes(nodToAdd);
+                dijktraPathFinder.AddListOfEdge(edgeToAdd);
+                Console.WriteLine("Start from {0}: ", item);
+                foreach (var node in nodToAdd)
+                {
+                    var pathInfo = dijktraPathFinder.GetPath(item, node);
+                    if (pathInfo == null)
+                    {
+                        Console.WriteLine("Route to {0}: Unreachable", node);
+                        continue;
+                    }
+                    var path = pathInfo.Item1;
+                    var cost = pathInfo.Item2;
+                    Console.WriteLine("Route to {0}: {1}", node, path);
+                    Console.WriteLine("Cost of Route to {0}: {1}", node, cost);
+                }
             }
+            
+
         }
     }
 }

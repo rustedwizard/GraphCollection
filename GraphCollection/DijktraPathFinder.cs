@@ -16,11 +16,15 @@ namespace GraphCollection
             FINISHED = false;
         }
 
+        //Add one node into graph
+        //returns a boolean value indicate if the edge has been added successfully
         public bool AddNodes(T nodes)
         {
             return MainGraph.AddNodes(nodes);
         }
 
+        //Add list of nodes into graph
+        //returns an integer value indicate if the edge has been added successfully
         public int AddListOfNodes(List<T> nodes)
         {
             int res = 0;
@@ -36,11 +40,15 @@ namespace GraphCollection
             return res;
         }
 
+        //Add one edge into graph
+        //returns a boolean value indicate if the edge has been added successfully
         public bool AddEdge(Tuple<T, T, int> edge)
         {
             return MainGraph.AddEdge(edge.Item1, edge.Item2, edge.Item3);
         }
 
+        //Add list of edges into graph
+        //Returns an integer value indicate how many deges have been added to graph sucessfully
         public int AddListOfEdge(List<Tuple<T, T, int>> edges)
         {
             int res = 0;
@@ -54,6 +62,12 @@ namespace GraphCollection
             }
 
             return res;
+        }
+
+        public void ClearGraph()
+        {
+            MainGraph.ClearGraph();
+            FINISHED = false;
         }
 
         //Find shortest path to every reachable node(from start point)

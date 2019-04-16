@@ -109,5 +109,11 @@ namespace GraphCollection
         {
            return GetSortedListOfNodesValue()[0];
         }
+
+        public void ClearGraph()
+        {
+            NodesDictionary.Clear();
+            Result.Clear();
+        }
     }
 }
