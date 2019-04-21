@@ -14,6 +14,14 @@
     <AssemblyVersion>1.0.17.23</AssemblyVersion>
 
     <FileVersion>1.0.17.23</FileVersion>
+
+    <PackageProjectUrl>https://github.com/rustedwizard/GraphCollection</PackageProjectUrl>
+
+    <RepositoryUrl>https://github.com/rustedwizard/GraphCollection</RepositoryUrl>
+
+    <RepositoryType>Github</RepositoryType>
+
+    <PackageTags>Graph, Dijiktra, Shortest Path</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>

@@ -2,6 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageProjectUrl>https://github.com/rustedwizard/GraphCollection</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/rustedwizard/GraphCollection</RepositoryUrl>
+    <Description>This nuget package cotains C# implementation of Dijiktra's Algorithm.</Description>
+    <Version>1.0.17</Version>
+    <AssemblyVersion>1.0.17.12</AssemblyVersion>
+    <FileVersion>1.0.17.12</FileVersion>
+    <PackageTags>Graph, Dijiktra, Shortest Path</PackageTags>
+    <RepositoryType>Git</RepositoryType>
   </PropertyGroup>
 
 </Project>

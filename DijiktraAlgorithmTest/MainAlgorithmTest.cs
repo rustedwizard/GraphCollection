@@ -30,25 +30,30 @@ namespace DijiktraAlgorithmTest
             foreach(var item in nodToAdd)
             {
                 dijktraPathFinder.ClearGraph();
-                dijktraPathFinder.AddListOfNodes(nodToAdd);
-                dijktraPathFinder.AddListOfEdge(edgeToAdd);
+                int addednodes = dijktraPathFinder.AddListOfNodes(nodToAdd);
+                int addededge = dijktraPathFinder.AddListOfEdge(edgeToAdd);
+                Console.WriteLine("Number of Nodes to add: {0}, Number of Nodes added: {1}", nodToAdd.Count, addednodes);
+                Console.WriteLine("Number of Edges to add: {0}, Number of Edges added: {1}", edgeToAdd.Count, addededge);
+                Console.WriteLine();
                 Console.WriteLine("Start from {0}: ", item);
+                Console.WriteLine();
+                Console.WriteLine();
                 foreach (var node in nodToAdd)
                 {
                     var pathInfo = dijktraPathFinder.GetPath(item, node);
                     if (pathInfo == null)
                     {
                         Console.WriteLine("Route to {0}: Unreachable", node);
+                        Console.WriteLine();
                         continue;
                     }
                     var path = pathInfo.Item1;
                     var cost = pathInfo.Item2;
                     Console.WriteLine("Route to {0}: {1}", node, path);
                     Console.WriteLine("Cost of Route to {0}: {1}", node, cost);
+                    Console.WriteLine();
                 }
             }
-            
-
         }
     }
 }
