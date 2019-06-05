@@ -87,27 +87,31 @@ namespace GraphCollection
             return (NodesDictionary.Count == 0);
         }
 
-        //return all nodes in one list sorted by the weight associated with it.
-        private List<T> GetSortedListOfNodesValue()
-        {
-            List<T> res = new List<T>();
-            List<DijiktraNode<T>> toSort = new List<DijiktraNode<T>>();
-            foreach (var item in NodesDictionary)
-            {
-                toSort.Add(item.Value);
-            }
-            toSort.Sort();
-            foreach (var item in toSort)
-            {
-                res.Add(item.Value);
-            }
-            return res;
-        }
-
         //get the node with smallest weight.
         public T GetSmallestNodes()
         {
-           return GetSortedListOfNodesValue()[0];
+            DijiktraNode<T> res = null;
+            foreach(var item in NodesDictionary)
+            {
+                if(res == null)
+                {
+                    res = item.Value;
+                }
+                else
+                {
+                    if(res.WeightSet && item.Value.WeightSet && item.Value.Weight < res.Weight)
+                    {
+                        res = item.Value;
+                        continue;
+                    }
+                    if(!res.WeightSet && item.Value.WeightSet)
+                    {
+                        res = item.Value;
+                        continue;
+                    }
+                }
+            }
+            return res.Value;
         }
 
         //Clear all element inside the graph
